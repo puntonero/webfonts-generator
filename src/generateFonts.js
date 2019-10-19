@@ -49,7 +49,6 @@ var generators = {
                 for(var i=0;i<name.length;i++) {
                     ligature+=String.fromCharCode(name.charCodeAt(i))
 				}
-				//console.log(unicode,name,ligature);
 				glyph.metadata = {
 					name: name,
 					unicode: [unicode,ligature]
