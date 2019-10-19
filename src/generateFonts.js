@@ -51,7 +51,7 @@ var generators = {
                 }
 				glyph.metadata = {
 					name: name,
-					unicode: [unicode,ligature]
+					unicode: [unicode,ligature,name]
 				}
 				fontStream.write(glyph)
 			})
