@@ -19,9 +19,10 @@ var renderHtml = function(options) {
 	var styles = renderCss(_.extend({}, options, {
 		cssFontPath: htmlFontsPath
 	}))
-
+	//console.log('options', options);
 	var ctx = _.extend({
 		names: options.names,
+		codepoints: options.codepoints,
 		fontName: options.fontName,
 		styles: styles
 	}, options.templateOptions)
