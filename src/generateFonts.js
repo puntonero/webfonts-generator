@@ -22,7 +22,7 @@ var ttf2eot = require('ttf2eot')
 var generators = {
 	svg: {
 		fn: function(options, done) {
-			var font = new Buffer(0)
+			var font = new Buffer.alloc(0)
 			var svgOptions = _.pick(options,
 				'fontName', 'fontHeight', 'descent', 'normalize', 'round'
 			)
@@ -48,10 +48,11 @@ var generators = {
                 var ligature = ''
                 for(var i=0;i<name.length;i++) {
                     ligature+=String.fromCharCode(name.charCodeAt(i))
-                }
+				}
+				//console.log(unicode,name,ligature);
 				glyph.metadata = {
 					name: name,
-					unicode: [unicode,ligature,name]
+					unicode: [unicode,ligature]
 				}
 				fontStream.write(glyph)
 			})
@@ -64,7 +65,7 @@ var generators = {
 		deps: ['svg'],
 		fn: function(options, svgFont, done) {
 			var font = svg2ttf(svgFont, options.formatOptions['ttf'])
-			font = new Buffer(font.buffer)
+			font = new Buffer.from(font.buffer)
 			done(null, font)
 		}
 	},
@@ -73,7 +74,7 @@ var generators = {
 		deps: ['ttf'],
 		fn: function(options, ttfFont, done) {
 			var font = ttf2woff(new Uint8Array(ttfFont), options.formatOptions['woff'])
-			font = new Buffer(font.buffer)
+			font = new Buffer.from(font.buffer)
 			done(null, font)
 		}
 	},
@@ -82,7 +83,7 @@ var generators = {
 		deps: ['ttf'],
 		fn: function(options, ttfFont, done) {
 			var font = ttf2woff2(new Uint8Array(ttfFont), options.formatOptions['woff2'])
-			font = new Buffer(font.buffer)
+			font = new Buffer.from(font.buffer)
 			done(null, font)
 		}
 	},
@@ -91,7 +92,7 @@ var generators = {
 		deps: ['ttf'],
 		fn: function(options, ttfFont, done) {
 			var font = ttf2eot(new Uint8Array(ttfFont), options.formatOptions['eot'])
-			font = new Buffer(font.buffer)
+			font = new Buffer.from(font.buffer)
 			done(null, font)
 		}
 	}
